@@ -1,4 +1,4 @@
-const x = "string"
+ const x = "string"
 const y = true
 console.log(typeof x) // --> "string"
 console.log(typeof y) // --> "boolean"
@@ -16,7 +16,7 @@ interface Contact {
     status?: ContactStatus;
 }
 
-function toContact(nameOrContact) {
+function toContact(nameOrContact: string | Contact): Contact {
     if (typeof nameOrContact === "object") {
         return {
             id: nameOrContact.id,
@@ -32,3 +32,8 @@ function toContact(nameOrContact) {
         }
     }
 }
+
+
+const myType = {min: 1, max: 200}
+
+function save(source: typeof myType) {}

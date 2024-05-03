@@ -50,9 +50,24 @@ function singleton<T extends { new(...args: any[]): {} }>(constructor: T) {
     }
 }
 
+function auditable(target: object, key: string | symbol){
+    let val = target[key];
+
+    Object.defineProperty(target, key, {
+        get: () => val,
+        set: (newVal) => {
+            console.log(`${key.toString()} changed: `, newVal );
+            val = newVal;
+        },
+        enumerable: true,
+        configurable: true
+    })
+}
+
 @freeze
 @singleton
 class ContactRepository {
+    @auditable
     private contacts: Contact[] = [];
 
     @authorize("ContactViewer")

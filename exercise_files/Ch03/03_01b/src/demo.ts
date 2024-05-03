@@ -1,15 +1,12 @@
 type ContactName = string;
 
-enum ContactStatus {
-    Active = "active",
-    Inactive = "inactive",
-    New = "new"
-}
+type ContactStatus = "active" | "inactive" | "new"
+type ContactBirthDate = Date | number | string
 
-interface Contact {
+interface Contact extends Address{
     id: number;
     name: ContactName;
-    birthDate?: Date;
+    birthDate?: ContactBirthDate;
     status?: ContactStatus;
 }
 
@@ -20,6 +17,8 @@ interface Address {
     region: string;
     postalCode: string;
 }
+
+type AdderssableContact = Contact & Address
 
 function getBirthDate(contact: Contact) {
     if (typeof contact.birthDate === "number") {
